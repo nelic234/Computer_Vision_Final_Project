@@ -1,8 +1,8 @@
-.venv
-data/*
-preprocessed_data/*
-flow_data/*
-depth_data/*
-pytorch_pwc/*
-Depth-Anything-V2/*
-DepthAnythingV2Checkpoints/*
+.venv/
+data/
+preprocessed_data/
+flow_data/
+depth_data/
+pytorch_pwc/
+Depth-Anything-V2/
+DepthAnythingV2Checkpoints/
