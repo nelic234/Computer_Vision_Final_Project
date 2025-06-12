@@ -2,7 +2,7 @@
 
 ### Authors: Neli Čatar, Gellert Toth, and Aimee Lin
 
-Welcome to our final project for the *Computer Vision* course. This repository contains the code and documentation for our implementation of Topic 6: **Truth in Motion: Depth and Flow Enhanced DeepFake Detection**.
+This repository contains our final project for the *Computer Vision* course. The chosen topic was Topic 6: **Truth in Motion: Depth and Flow Enhanced DeepFake Detection**.
 
 We have developed a full pipeline, showcased in [`project.ipynb`](project.ipynb). Note that the dataset used for this project is [FaceForensics++](https://github.com/ondyari/FaceForensics), which is subject to license restrictions. As a result, dataset loading and access are not included in this repository.
 
@@ -33,7 +33,7 @@ Our investigation includes the following components:
 
 ## Background
 
-DeepFake detection is a critical task in modern multimedia forensics. In this project, we explored enhanced detection methods using motion (optical flow) and spatial (depth map) cues, drawing on recent advances in both traditional computer vision and deep learning models such as Vision Transformers.
+DeepFake detection is a critical task in modern multimedia forensics. In this project, we explored enhanced detection methods using motion (optical flow) and spatial (depth map) cues, drawing on recent advances in both traditional computer vision and deep learning models such as Vision Transformers. We trained ViT and Swin transformers using both methods and compared the results. Finally, we also combined the two and trained the third and final model.
 
 ---
 
@@ -49,7 +49,7 @@ cd cv-final-project
 Install the required dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt % we have to create this
 ```
 
 ---
@@ -57,7 +57,7 @@ pip install -r requirements.txt
 ## Usage
 
 1. Ensure you have access to the FaceForensics++ dataset and set up the appropriate paths in the notebook.
-2. Run the pipeline using Jupyter:
+2. Run the pipeline using Jupyter notebook:
 
 ```bash
 jupyter notebook project.ipynb
@@ -91,10 +91,25 @@ This project is licensed under the ...
 
 ## References
 
-1. Rössler, A., Cozzolino, D., Verdoliva, L., Riess, C., Thies, J., & Nießner, M. (2019). *Faceforensics++: Learning to detect manipulated facial images*. arXiv preprint [arXiv:1901.08971](https://arxiv.org/abs/1901.08971)
+[1] A. Rossler, D. Cozzolino, L. Verdoliva, C. Riess, J. Thies, and M. Nießner, “FaceForensics++: Learning to detect manipulated facial images,” arXiv preprint arXiv:1901.08971, 2019.
 
-2. Amerini, I., Galteri, L., Caldelli, R., & Del Bimbo, A. (2019). *Deepfake Video Detection through Optical Flow Based CNN*. In *2019 IEEE/CVF International Conference on Computer Vision Workshop (ICCVW)* (pp. 1205–1207). [DOI:10.1109/ICCVW.2019.00152](https://doi.org/10.1109/ICCVW.2019.00152)
+[2] I. Amerini, L. Galteri, R. Caldelli, and A. Del Bimbo, “Deepfake video detection through optical flow based CNN,” in Proc. IEEE/CVF Int. Conf. Comput. Vis. Workshops (ICCVW), Seoul, Korea (South), 2019, pp. 1205–1207, doi: 10.1109/ICCVW.2019.00152.
 
-3. Nassif, A. B., Nasir, Q., Talib, M. A., & Gouda, O. M. (2022). *Improved Optical Flow Estimation Method for Deepfake Videos*. *Sensors*, 22(7), 2500. [DOI:10.3390/s22072500](https://doi.org/10.3390/s22072500)
+[3] A. B. Nassif, Q. Nasir, M. A. Talib, and O. M. Gouda, “Improved optical flow estimation method for deepfake videos,” Sensors, vol. 22, no. 7, p. 2500, Mar. 2022, doi: 10.3390/s22072500.
+
+[4] L. Maiano, L. Papa, K. Vocaj, and I. Amerini, “DepthFake: A depth-based strategy for detecting Deepfake videos,” in Pattern Recognition, Computer Vision, and Image Processing. ICPR 2022 International Workshops and Challenges, Lecture Notes in Computer Science, vol. 13774, Springer, 2023, pp. 17–31, doi: 10.1007/978-3-031-37745-7_2.
+
+[5] D. Sun, X. Yang, M.-Y. Liu, and J. Kautz, “PWC‑Net: CNNs for Optical Flow Using Pyramid, Warping, and Cost Volume,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), 2018, pp. 8934–8943, doi: 10.1109/CVPR.2018.00931.
+
+[6] L. Yang, B. Kang, Z. Huang, Z. Zhao, X. Xu, J. Feng, and H. Zhao, “Depth Anything V2,” in Advances in Neural Information Processing Systems, vol. 37, NeurIPS 2024, doi: 10.48550/arXiv.2406.09414.
+
+[7] A. Dosovitskiy, L. Beyer, A. Kolesnikov, D. Weissenborn, X. Zhai, T. Unterthiner, M. Dehghani, M. Minderer, G. Heigold, S. Gelly, J. Uszkoreit, and N. Houlsby, “An Image is Worth 16×16 Words: Transformers for Image Recognition at Scale,” in Proc. Int. Conf. Learn. Represent. (ICLR), 2021. doi: 10.48550/arXiv.2010.11929
+
+[8] Z. Liu, Y. Lin, Y. Cao, H. Hu, Y. Wei, Z. Zhang, S. Lin, and B. Guo, “Swin Transformer: Hierarchical Vision Transformer Using Shifted Windows,” in Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV), 2021, pp. 10012–10022, doi: 10.1109/ICCV48922.2021.00986
+
+[9] G. Bradski and A. Kaehler, Learning OpenCV: Computer Vision with the OpenCV Library, 1st ed. Sebastopol, CA, USA: O'Reilly Media, 2008.
+
+[10] K. Zhang, Z. Zhang, Z. Li, and Y. Qiao, "Joint Face Detection and Alignment Using Multitask Cascaded Convolutional Networks," IEEE Signal Processing Letters, vol. 23, no. 10, pp. 1499–1503, Oct. 2016, doi: 10.1109/LSP.2016.2603342.
+
 
 ---
