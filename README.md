@@ -24,7 +24,7 @@ Our investigation includes the following components:
 * [Background](#background)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Credits](#credits)
+* [Credits](#credits)fi
 * [License](#license)
 * [Badges](#badges)
 * [References](#references)
@@ -33,9 +33,15 @@ Our investigation includes the following components:
 
 ## Background
 
-DeepFake detection is a critical task in modern multimedia forensics. In this project, we explored enhanced detection methods using motion (optical flow) and spatial (depth map) cues, drawing on recent advances in both traditional computer vision and deep learning models such as Vision Transformers. We trained ViT and Swin transformers using both methods and compared the results. Finally, we also combined the two and trained the third and final model.
+DeepFake detection is a critical task in modern multimedia forensics. In this project, we aimed to further previous research that used optical flow based and depth based deepfake detection by finetuning a pretrained CNN vision model. Drawing on recent advances we switched out the underlying backbone model from a CNN to a Vision Transformer. We trained ViT and Swin transformers using both methods and compared the results. Finally, we also combined the two and trained the third and final model.
 
----
+First, videos are broken into frames and we extract faces from each frame using MTCNN. The pictures are then cropped to the required size by downstream tasks.   
+
+Optical flow describes how each pixel moves between two (consecutive) frames. This flow data is then turned into an RGB picture by converting the flow vectors first into HSV then into RGB. By leveraging pretrained transformer models such as Vit and Swin, we only require a limited amount of training data in order to achieve competitive performace. We used the FaceForensics++ dataset for finetuning and evaluating our model. 
+
+The depth at each pixel represents how far is the point in space from the camera at that pixel. We estimed depth using Depth Anything V2. To turn this into the required RGB format, we copied the same input across all 3 color channels. From here on the process is the same: finetune a transformer model on the FaceForensics++ datasets and evaluate on set aside data.
+
+The selected transformers models are all relatively expensive to be run for inference at large scale. The most likely and pressing usecase of such a model would be to automatically flag deepfake videos on social media platforms such as Instragram, Facebook or Tiktok, in order to stop the spreading of fake news and information. These platforms have a staggering amount of videos that would have to be processed meaning that the expensivity of the model is relevant. We tried to explore various compression techniques and evalute the performance loss vs efficiency gain trade off. We explored compression techniques such as quantiziation and distillation.  
 
 ## Installation
 
