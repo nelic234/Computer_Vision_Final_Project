@@ -55,7 +55,7 @@ cd cv-final-project
 Install the required dependencies:
 
 ```bash
-pip install -r requirements.txt % we have to create this
+pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu121 % we have to create this
 ```
 
 ---

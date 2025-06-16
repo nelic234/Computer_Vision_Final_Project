@@ -5,4 +5,4 @@ matplotlib==3.10.3
 torch==2.3.0+cu121
 torchvision==0.18.0+cu121
 scikit-learn==1.7.0
-transformers==4.51.3
+transformers==4.51.3    
