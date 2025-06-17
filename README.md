@@ -35,13 +35,39 @@ Our investigation includes the following components:
 
 DeepFake detection is a critical task in modern multimedia forensics. Existing research used optical flow based and depth based deepfake detection by finetuning a pretrained CNN vision model. We aimed to try these already existing methods, with the small modification of using pretrained vision transformers as the backbone instead. We finetuned the Dino-v2 (base) transformer using both methods and compared the results. We also also aim to further existing research by exploring compression techniques.
 
-First, videos are broken into frames and we extract faces from each frame using MTCNN. The pictures are then cropped to the required size by downstream tasks.   
+### Data preprocessing
+
+First, videos are broken into frames and we extract faces from each frame using MTCNN. The pictures are then cropped to the required size by downstream tasks and saved on disk.  
+
+### Optical Flow
 
 Optical flow describes how each pixel moves between two (consecutive) frames. This flow data is then turned into an RGB picture by converting the flow vectors first into HSV then into RGB. By leveraging pretrained transformer models such as dino-v2, we only require a limited amount of training data in order to achieve competitive performace. We used the FaceForensics++ dataset for finetuning and evaluating our model. 
 
+During training we freeze all but the last layer of the dino-v2 backbone and add an extra classification head that takes the embedding produced by the backbone as the input. The classification head is made up of two linear layers with a relu and a dropout inbetween.  
+
+### Depth
+
 The depth at each pixel represents how far is the point in space from the camera at that pixel. We estimed depth using Depth Anything V2. To turn this into the required RGB format, we copied the same input across all 3 color channels. From here on the process is the same: finetune a transformer model on the FaceForensics++ datasets and evaluate on set aside data.
 
+### Compression
+
 The selected transformers models are all relatively expensive to be run for inference at large scale. The most likely and pressing usecase of such a model would be to automatically flag deepfake videos on social media platforms such as Instragram, Facebook or Tiktok, in order to stop the spreading of fake news and information. These platforms have a staggering amount of videos that would have to be processed meaning that the expensivity of the model is relevant. We tried to explore various compression techniques and evalute the performance loss vs efficiency gain trade off. We explored compression techniques such as quantiziation and distillation.  
+
+Quantization refers to using float 16 (or even int 8) instead of using float 32. Using float 16 is a lot less computationally heavy, but it is less accurate. Fortunately, torch implements a very effective autocast method. Autocast decided to use float 16 when it is safe (no chance for precision loss) and uses float 32 when it needs to. By using autocast we can achieve a considerable speedup in inference and training time, while supposedly not sacrifcing any accuracy. 
+
+When distilling a larger model into a smaller (and faster) model, we aim to get the same performance with the small model as with the larger one, by teaching the small model the inner representations of the larger model. In our code this is done by comparing the embedding produced by the finetuned backbone. The difference between these two representations is measured by KL divergence and is added to the loss term. Now the loss combines both classification loss and representation divergence loss. Since the output embedding of the two models is potentially different (as is the case with Dino-v2 small and base) before comparison we first project the representation of the larger model into the correct size using a simple linear layer. We do not expect to achieve any real results here, since Dino-v2 small is already itself distilled from the base model before its realease. Nonetheless, we wanted to achieve at least a functioning distillation setup.
+
+### Training
+
+We struggled with overfitting quite a lot, especially in the case of flow data. Due to computational constraints, we only trained our model on 4 sources of vidoes found in the FaceForensics++ dataset: actors, youtube, DeepFakeDetection and Deepfakes. For each source, we selected only a 100 vidoes for a total of 400 videos. The data is split up into train, val and testing data with a 0.7, 0.2, 0.1 split. We do believe that the increased amount of data would have reduced overfitting, regardless we tried to reduce overfitting by applying dropout and by reducing the number of trainable encoder layers in the transformer. We also saved the best model according to the validation data for final evaluation on the testing data. 
+
+### Results
+
+We found that the depth based model perfomed better compared to the flow model, by achieving over 60% accuracy on testing data compared to 53%. But we did not manage to replicate the classification accuracies of existing research. 
+
+Quantization using autocast did achieve an almost 3x speedup while maintaining the same classification accuracy.
+
+Our distillation training did not finish in time, so these results cannot be included here. However, we believe that it would not achieve a considerable accuracy gain compared to simply training the dino-v2 small model my itself, since the dino-v2 small model based network already achieves the same performance as the base model (at a rate of 2x speedup as well). 
 
 ## Installation
 
