@@ -33,11 +33,11 @@ Our investigation includes the following components:
 
 ## Background
 
-DeepFake detection is a critical task in modern multimedia forensics. In this project, we aimed to further previous research that used optical flow based and depth based deepfake detection by finetuning a pretrained CNN vision model. Drawing on recent advances we switched out the underlying backbone model from a CNN to a Vision Transformer. We trained ViT and Swin transformers using both methods and compared the results. Finally, we also combined the two and trained the third and final model.
+DeepFake detection is a critical task in modern multimedia forensics. Existing research used optical flow based and depth based deepfake detection by finetuning a pretrained CNN vision model. We aimed to try these already existing methods, with the small modification of using pretrained vision transformers as the backbone instead. We finetuned the Dino-v2 (base) transformer using both methods and compared the results. We also also aim to further existing research by exploring compression techniques.
 
 First, videos are broken into frames and we extract faces from each frame using MTCNN. The pictures are then cropped to the required size by downstream tasks.   
 
-Optical flow describes how each pixel moves between two (consecutive) frames. This flow data is then turned into an RGB picture by converting the flow vectors first into HSV then into RGB. By leveraging pretrained transformer models such as Vit and Swin, we only require a limited amount of training data in order to achieve competitive performace. We used the FaceForensics++ dataset for finetuning and evaluating our model. 
+Optical flow describes how each pixel moves between two (consecutive) frames. This flow data is then turned into an RGB picture by converting the flow vectors first into HSV then into RGB. By leveraging pretrained transformer models such as dino-v2, we only require a limited amount of training data in order to achieve competitive performace. We used the FaceForensics++ dataset for finetuning and evaluating our model. 
 
 The depth at each pixel represents how far is the point in space from the camera at that pixel. We estimed depth using Depth Anything V2. To turn this into the required RGB format, we copied the same input across all 3 color channels. From here on the process is the same: finetune a transformer model on the FaceForensics++ datasets and evaluate on set aside data.
 
@@ -107,11 +107,11 @@ This project is licensed under the ...
 
 [5] D. Sun, X. Yang, M.-Y. Liu, and J. Kautz, “PWC‑Net: CNNs for Optical Flow Using Pyramid, Warping, and Cost Volume,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), 2018, pp. 8934–8943, doi: 10.1109/CVPR.2018.00931.
 
-[6] L. Yang, B. Kang, Z. Huang, Z. Zhao, X. Xu, J. Feng, and H. Zhao, “Depth Anything V2,” in Advances in Neural Information Processing Systems, vol. 37, NeurIPS 2024, doi: 10.48550/arXiv.2406.09414.
+[6] S. Niklaus, A Reimplementation of PWC-Net Using PyTorch, 2018. [Online]. Available: https://github.com/sniklaus/pytorch-pwc
 
-[7] A. Dosovitskiy, L. Beyer, A. Kolesnikov, D. Weissenborn, X. Zhai, T. Unterthiner, M. Dehghani, M. Minderer, G. Heigold, S. Gelly, J. Uszkoreit, and N. Houlsby, “An Image is Worth 16×16 Words: Transformers for Image Recognition at Scale,” in Proc. Int. Conf. Learn. Represent. (ICLR), 2021. doi: 10.48550/arXiv.2010.11929
+[7] L. Yang, B. Kang, Z. Huang, Z. Zhao, X. Xu, J. Feng, and H. Zhao, “Depth Anything V2,” in Advances in Neural Information Processing Systems, vol. 37, NeurIPS 2024, doi: 10.48550/arXiv.2406.09414.
 
-[8] Z. Liu, Y. Lin, Y. Cao, H. Hu, Y. Wei, Z. Zhang, S. Lin, and B. Guo, “Swin Transformer: Hierarchical Vision Transformer Using Shifted Windows,” in Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV), 2021, pp. 10012–10022, doi: 10.1109/ICCV48922.2021.00986
+[8] M. Oquab, T. Darcet, T. Moutakanni, H. Vo, M. Szafraniec, et al., "DINOv2: Learning Robust Visual Features without Supervision," arXiv preprint arXiv:2304.07193, 2023. 
 
 [9] G. Bradski and A. Kaehler, Learning OpenCV: Computer Vision with the OpenCV Library, 1st ed. Sebastopol, CA, USA: O'Reilly Media, 2008.
 
