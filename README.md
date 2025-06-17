@@ -81,7 +81,7 @@ cd cv-final-project
 Install the required dependencies:
 
 ```bash
-pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu121 % we have to create this
+pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu121
 ```
 
 ---
@@ -105,11 +105,6 @@ jupyter notebook project.ipynb
 * Dataset: [FaceForensics++](https://github.com/ondyari/FaceForensics)
 * Optical Flow & Depth Techniques inspired by recent literature (see [References](#references)).
 
----
-
-## License
-
-This project is licensed under the ...
 
 ---
 
