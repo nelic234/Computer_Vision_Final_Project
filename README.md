@@ -67,7 +67,7 @@ We found that the depth based model perfomed better compared to the flow model, 
 
 Quantization using autocast did achieve an almost 3x speedup while maintaining the same classification accuracy.
 
-Our distillation training did not finish in time, so these results cannot be included here. However, we believe that it would not achieve a considerable accuracy gain compared to simply training the dino-v2 small model my itself, since the dino-v2 small model based network already achieves the same performance as the base model (at a rate of 2x speedup as well). 
+The small model trained only with classification loss performs similarly to the base model (it actually manages to outperform it, we presume becuase it is less overfitted), while achieving a 2x speedup in inference time compared to the base model. By distilling the base model into the small model we managed to achieve the best performance of 67% accuracy on our testing data.
 
 ## Installation
 
